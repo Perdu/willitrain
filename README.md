@@ -1,7 +1,7 @@
 Will it rain?
 =============
 
-Just a simple script to check whether it will rain today in Villeurbanne.
+Just a simple script to check whether it will rain today, because I could not find a simple script to do that.
 
 # Install
 
