@@ -1,10 +1,10 @@
 #!/bin/bash
 
-weather=$(wget -O - http://www.accuweather.com/fr/fr/villeurbanne/136558/daily-weather-forecast/136558?day=1 2>/dev/null | grep -A1 apgWxInfoObj.fc | grep -v apgWxInfoObj.fc)
-precipitations=$(echo "$weather" | perl -pe "s/.*dp:{lp:'(\d+)'.*/\1/")
-rain=$(echo "$weather" | perl -pe "s/.*dp:{lp:'\d+',r:'(\d+)'.*/\1/")
-snow=$(echo "$weather" | perl -pe "s/.*dp:{lp:'\d+',r:'\d+',s:'(\d+\.?\d*)'.*/\1/")
-ice=$(echo "$weather" | perl -pe "s/.*dp:{lp:'\d+',r:'\d+',s:'\d+\.?\d*',i:'(\d+)'.*/\1/")
+weather=$(wget -O - http://www.accuweather.com/fr/fr/villeurbanne/136558/daily-weather-forecast/136558?day=1 2>/dev/null)
+precipitations=$(echo "$weather" | grep -m1 'cipitations:' | perl -pe "s/.*>(\d+) mm.*/\1/")
+rain=$(echo "$weather" | grep -m1 Pluie | perl -pe "s/.*>(\d+) mm.*/\1/")
+snow=$(echo "$weather" | grep -m1 Neige | perl -pe "s/.*>(\d+) cm.*/\1/")
+ice=$(echo "$weather" | grep -m1 Verglas | perl -pe "s/.*>(\d+) mm.*/\1/")
 
 if [ "$precipitations" -gt 0 ]
 then
@@ -16,7 +16,7 @@ then
     echo "Pluie : $rain mm"
 fi
 
-if [ $(echo "$snow>0" | bc) ]
+if [ "$snow" -gt 0 ]
 then
     echo "Neige : $snow cm"
 fi
