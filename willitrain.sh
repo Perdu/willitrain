@@ -25,3 +25,8 @@ if [ "$ice" -gt 0 ]
 then
     echo "Verglas : $ice mm"
 fi
+
+if [ "$precipitations" -gt 0 -o "$rain" -gt 0 -o "$snow" -gt 0 -o "$ice" -gt 0 ]
+then
+    echo 'https://www.google.fr/search?q=météo'
+fi
