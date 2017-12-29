@@ -3,8 +3,8 @@
 weather=$(wget -O - http://www.accuweather.com/fr/fr/villeurbanne/136558/daily-weather-forecast/136558?day=1 2>/dev/null)
 precipitations=$(echo "$weather" | grep -m1 'cipitations:' | perl -pe "s/.*>(\d+) mm.*/\1/")
 rain=$(echo "$weather" | grep -m1 'Pluie:' | perl -pe "s/.*>(\d+) mm.*/\1/")
-snow=$(echo "$weather" | grep -m1 Neige | perl -pe "s/.*>(\d+) cm.*/\1/")
-ice=$(echo "$weather" | grep -m1 Verglas | perl -pe "s/.*>(\d+) mm.*/\1/")
+snow=$(echo "$weather" | grep -m1 Neige | perl -pe "s/.*>((\d*.)?\d+) cm.*/\1/")
+ice=$(echo "$weather" | grep -m1 Verglas | perl -pe "s/.*>((\d*.)?\d+) mm.*/\1/")
 
 if [ "$precipitations" -gt 0 ]
 then
@@ -16,17 +16,17 @@ then
     echo "Pluie : $rain mm"
 fi
 
-if [ "$snow" -gt 0 ]
+if [ "$snow" != "0" ]
 then
     echo "Neige : $snow cm"
 fi
 
-if [ "$ice" -gt 0 ]
+if [ "$ice" != "0" ]
 then
     echo "Verglas : $ice mm"
 fi
 
-if [ "$precipitations" -gt 0 -o "$rain" -gt 0 -o "$snow" -gt 0 -o "$ice" -gt 0 ]
+if [ "$precipitations" -gt 0 -o "$rain" -gt 0 -o "$snow" != "0" -o "$ice" -gt 0 ]
 then
     echo 'https://www.google.fr/search?q=météo'
 fi
