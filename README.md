@@ -7,4 +7,4 @@ Just a simple script to check whether it will rain today, because I could not fi
 
 Add script to your crontab. You will receive emails if your server is configured to do so.
 
-Also, you may want to change the URL to the one pointing to your own city.
+Copy location_config.sh.example to location_config.sh.example and add the desired location. You can get precise location on Google Maps by right clicking → more info on this location.
