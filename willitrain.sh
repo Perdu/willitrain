@@ -1,8 +1,9 @@
 #!/bin/bash
 
+source ./location_config.sh
 
 #USER_AGENT='Mozilla/5.0 Firefox/60.0'
-weather=$(wget -O - 'https://weather.com/fr-FR/temps/aujour/l/45.78,4.86?par=google' 2>/dev/null)
+weather=$(wget -O - "https://weather.com/fr-FR/temps/aujour/l/$location?par=google" 2>/dev/null)
 precipitations=$(echo "$weather" | grep -oPm4 "precip--3JCDO\">\d+%</span>" | perl -pe "s/.*>(\d+)%<.*/\1/")
 rain=0 #$(echo "$weather" | grep -m1 'Pluie:' | perl -pe "s/.*>(\d+) mm.*/\1/")
 snow="0" #$(echo "$weather" | grep -m1 Neige | perl -pe "s/.*>((\d*.)?\d+) cm.*/\1/")
