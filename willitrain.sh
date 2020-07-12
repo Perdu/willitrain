@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./location_config.sh
+source $(dirname ${BASH_SOURCE[0]})/location_config.sh
 
 #USER_AGENT='Mozilla/5.0 Firefox/60.0'
 weather=$(wget -O - "https://weather.com/fr-FR/temps/aujour/l/$location?par=google" 2>/dev/null)
